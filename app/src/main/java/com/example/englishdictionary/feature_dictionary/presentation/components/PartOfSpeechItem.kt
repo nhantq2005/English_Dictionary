@@ -25,8 +25,8 @@ fun PartOfSpeechItem(partOfSpeech: String) {
             color = Color.White,
             modifier = Modifier
                 .padding(
-                    horizontal = 20.dp,
-                    vertical = 7.dp
+                    horizontal = 10.dp,
+                    vertical = 4.dp
                 )
         )
     }

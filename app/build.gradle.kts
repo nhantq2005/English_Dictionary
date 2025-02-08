@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+
 }
 
 android {
@@ -53,6 +54,8 @@ android {
 
 dependencies {
 
+//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -77,7 +80,7 @@ dependencies {
     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
     // Icons
-    implementation("androidx.compose.material:material-icons-extended:1.3.1")
+    implementation("androidx.compose.material:material-icons-extended:1.7.7")
 
 
     // Runtime
@@ -114,4 +117,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    
 }

@@ -10,28 +10,37 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 
 @Composable
-fun SaveButton(){
+fun SaveButton() {
     var saveButtonState by remember {
         mutableStateOf(false)
     }
-    IconButton(onClick = { saveButtonState=!saveButtonState }) {
-        Icon(
-            if (saveButtonState){
-                Icons.Default.Bookmark
-            }else{
-                Icons.Default.BookmarkBorder
-            }
-            , contentDescription = "Save word button")
+    IconButton(onClick = {
+        saveButtonState = !saveButtonState
+    }) {
+        if (saveButtonState) {
+            Icon(
+                Icons.Default.Bookmark,
+                contentDescription = "Save icon",
+                tint = Color(0xFFF1EA20)
+            )
+        } else {
+            Icon(
+                Icons.Default.BookmarkBorder,
+                contentDescription = "Unsave icon"
+            )
+        }
+
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ReviewSaveButton(){
+fun ReviewSaveButton() {
     EnglishDictionaryTheme {
         SaveButton()
     }
