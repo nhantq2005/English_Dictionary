@@ -20,7 +20,7 @@ class DictionaryRepositoryImpl @Inject constructor(
 ): DictionaryRepository {
     override suspend fun getWordResult(
         word: String
-    ): Flow<com.example.englishdictionary.util.Result<WordItem>> {
+    ): Flow<Result<WordItem>> {
         return flow {
             emit(Result.Loading(true))
 

@@ -1,5 +1,6 @@
 package com.example.englishdictionary.ui.theme
 
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 data class AppColor(
@@ -10,5 +11,11 @@ data class AppColor(
     val header: Color = Color.Unspecified,
     val background: Color = Color.Unspecified,
     val right: Color = Color.Unspecified,
-    val wrong: Color = Color.Unspecified
+    val wrong: Color = Color.Unspecified,
+    val saveButton: Color = Color.Unspecified,
+    val navIcon: Color = Color.Unspecified
 )
+
+val LocalAppColor = staticCompositionLocalOf {
+    AppColor()
+}

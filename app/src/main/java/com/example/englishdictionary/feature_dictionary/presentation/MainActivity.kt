@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.englishdictionary.feature_dictionary.presentation.components.AudioButton
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.components.FlashCard
 import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SaveWordItem
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EnglishDictionaryTheme {
-                FlashCard()
+                AudioButton()
 
             }
         }

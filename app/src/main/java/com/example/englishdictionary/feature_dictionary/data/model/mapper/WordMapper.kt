@@ -19,8 +19,8 @@ fun WordItemDto.toWordItem() = WordItem(
     }?: emptyList(),
     phonetics = phonetics?.map {
         it.toPhonetic()
-    }?: emptyList()
-//    timeStamp =System.currentTimeMillis()
+    }?: emptyList(),
+    timeStamp =System.currentTimeMillis()
 )
 
 fun MeaningDto.toMeaning() = Meaning(
