@@ -1,11 +1,9 @@
 package com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,12 +17,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.englishdictionary.feature_dictionary.presentation.components.PartOfSpeechItem
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
-import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
+import com.example.englishdictionary.ui.theme.AppTheme
 
 @Composable
-fun SaveWordItem(){
+fun SavedWordItem(){
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,10 +41,16 @@ fun SaveWordItem(){
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "WORD")
-                SaveButton()
+                Text(
+                    text = "WORD",
+                    style = AppTheme.appTypograhy.word.copy(fontSize = 30.sp)
+                )
+                SaveButton(size = 30.dp)
             }
+            PartOfSpeechItem(partOfSpeech = "Noun")
             Spacer(modifier = Modifier.padding(3.dp))
+            Text(text = "all the people living in a particular country, area, or place")
+            Spacer(modifier = Modifier.padding(5.dp))
             PartOfSpeechItem(partOfSpeech = "Noun")
             Spacer(modifier = Modifier.padding(3.dp))
             Text(text = "all the people living in a particular country, area, or place")
@@ -57,7 +62,7 @@ fun SaveWordItem(){
 @Preview(showBackground = true)
 @Composable
 fun PreviewSaveWordItem(){
-    EnglishDictionaryTheme {
-        SaveWordItem()
+    AppTheme {
+        SavedWordItem()
     }
 }

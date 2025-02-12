@@ -13,7 +13,10 @@ data class AppColor(
     val right: Color = Color.Unspecified,
     val wrong: Color = Color.Unspecified,
     val saveButton: Color = Color.Unspecified,
-    val navIcon: Color = Color.Unspecified
+    val navIcon: Color = Color.Unspecified,
+    val flashcard: Color = Color.Unspecified,
+    val selectedItem: Color = Color.Unspecified,
+    val textField:Color = Color.Unspecified
 )
 
 val LocalAppColor = staticCompositionLocalOf {

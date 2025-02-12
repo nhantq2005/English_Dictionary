@@ -15,10 +15,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
 import com.example.englishdictionary.feature_dictionary.presentation.components.AudioButton
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.components.FlashCard
-import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SaveWordItem
+import com.example.englishdictionary.feature_dictionary.presentation.main_screen.MainScreen
+import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordScreen
+
+import com.example.englishdictionary.ui.theme.AppTheme
 import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,9 +31,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            EnglishDictionaryTheme {
-                AudioButton()
-
+            AppTheme {
+//                SavedWordScreen()
+                MainScreen()
             }
         }
     }

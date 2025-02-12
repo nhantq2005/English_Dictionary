@@ -27,9 +27,11 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.englishdictionary.ui.theme.AppTheme
 import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 
 @Composable
@@ -39,8 +41,8 @@ fun FlashCard() {
     var value = if (!flipped) -1f else 1f
     Card(
         modifier = Modifier
-            .fillMaxWidth(0.7f)
-            .fillMaxHeight(0.4f)
+            .fillMaxWidth(0.9f)
+            .fillMaxHeight(0.7f)
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 8 * density
@@ -50,7 +52,7 @@ fun FlashCard() {
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(15.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = AppTheme.appColor.flashcard
 
         )
     ) {
@@ -60,9 +62,9 @@ fun FlashCard() {
         ) {
             Text(
                 text = if (flipped) "Back" else "Front",
-                fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-
+                fontSize = 45.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.SemiBold
                 )
         }
     }

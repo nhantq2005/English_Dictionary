@@ -24,7 +24,7 @@ fun AppTheme(
         ),
         word = TextStyle(
             fontFamily = RobotoFamily,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 35.sp
         ),
         navLabel = TextStyle(
@@ -41,6 +41,11 @@ fun AppTheme(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
+        ),
+        placeholder = TextStyle(
+            fontFamily = RobotoFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp
         )
     )
 
@@ -54,7 +59,10 @@ fun AppTheme(
         saveButton = Color(0xFFF1EA20),
         right = Color(0xFF36CC00),
         wrong = Color(0xFFEA3323),
-        navIcon = Color(0xFF44464F)
+        navIcon = Color(0xFF44464F),
+        flashcard = Color.White,
+        selectedItem = Color(0xFFC1CFEE),
+        textField = Color(0xFFEDF3FF)
     )
 
     CompositionLocalProvider(
