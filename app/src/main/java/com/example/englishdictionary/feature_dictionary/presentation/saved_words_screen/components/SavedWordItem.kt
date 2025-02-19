@@ -1,11 +1,15 @@
 package com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,12 +22,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 import com.example.englishdictionary.feature_dictionary.presentation.components.PartOfSpeechItem
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
+import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.MeaningItem
 import com.example.englishdictionary.ui.theme.AppTheme
 
 @Composable
-fun SavedWordItem(){
+fun SavedWordItem(
+    wordItem: WordItem
+) {
+    Log.e("COUNT", wordItem.meanings.size.toString())
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,7 +43,9 @@ fun SavedWordItem(){
             ),
         colors = CardDefaults.cardColors(Color.White)
     ) {
-        Column(modifier = Modifier.padding(11.dp)) {
+        Column(
+            modifier = Modifier.padding(11.dp)
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -42,18 +53,27 @@ fun SavedWordItem(){
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "WORD",
+                    text = wordItem.word,
                     style = AppTheme.appTypograhy.word.copy(fontSize = 30.sp)
                 )
-                SaveButton(size = 30.dp)
+                SaveButton(size = 30.dp) {
+
+                }
             }
-            PartOfSpeechItem(partOfSpeech = "Noun")
-            Spacer(modifier = Modifier.padding(3.dp))
-            Text(text = "all the people living in a particular country, area, or place")
-            Spacer(modifier = Modifier.padding(5.dp))
-            PartOfSpeechItem(partOfSpeech = "Noun")
-            Spacer(modifier = Modifier.padding(3.dp))
-            Text(text = "all the people living in a particular country, area, or place")
+//            LazyColum -> Error in size of Meaning
+            wordItem.meanings.forEach { meaning ->
+                Column() {
+                    PartOfSpeechItem(
+                        partOfSpeech = meaning.partOfSpeech
+                    )
+                    Spacer(modifier = Modifier.padding(vertical = 3.dp))
+                    Text(
+                        text = meaning.definitions.definition,
+                        style = AppTheme.appTypograhy.definition
+                    )
+                }
+                Spacer(modifier = Modifier.padding(vertical = 7.dp))
+            }
         }
 
     }
@@ -61,8 +81,8 @@ fun SavedWordItem(){
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewSaveWordItem(){
+fun PreviewSaveWordItem() {
     AppTheme {
-        SavedWordItem()
+//        SavedWordItem()
     }
 }

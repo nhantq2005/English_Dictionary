@@ -12,38 +12,67 @@ import com.google.gson.reflect.TypeToken
 class Converters {
 //    private val gson = Gson()
 
+//    private val gson = Gson()
+//
+//    @TypeConverter
+//    fun fromMeaning(meaing:List<Meaning>):String{
+//        return gson.toJson(meaing)
+//    }
+//
+//    @TypeConverter
+//    fun toMeaning(meaningString:String):List<Meaning>{
+//        val type = object : TypeToken<List<Meaning>>(){}.type
+//        return gson.fromJson(meaningString,type)
+//    }
+//
+//    @TypeConverter
+//    fun fromPhonetic(phonetic: List<Phonetic>):String{
+//        return gson.toJson(phonetic)
+//    }
+//
+//    @TypeConverter
+//    fun toPhonetic(phoneticString: String):List<Phonetic>{
+//        val type = object : TypeToken<List<Meaning>>(){}.type
+//        return gson.fromJson(phoneticString,type)
+//    }
+//
+//    @TypeConverter
+//    fun fromDefinition(definition: Definition):String{
+//        return gson.toJson(definition)
+//    }
+//
+//    @TypeConverter
+//    fun toDefinition(definitionString: String):Definition{
+//        val type = object : TypeToken<List<Meaning>>(){}.type
+//        return gson.fromJson(definitionString,type)
+//    }
+
     private val gson = Gson()
 
     @TypeConverter
-    fun fromMeaning(meaing:List<Meaning>):String{
-        return gson.toJson(meaing)
+    fun fromPhoneticList(value: List<Phonetic>): String = gson.toJson(value)
+
+    @TypeConverter
+    fun toPhoneticList(value: String): List<Phonetic> {
+        val type = object : TypeToken<List<Phonetic>>() {}.type
+        return gson.fromJson(value, type)
     }
 
     @TypeConverter
-    fun toMeaning(meaningString:String):List<Meaning>{
-        val type = object : TypeToken<List<Meaning>>(){}.type
-        return gson.fromJson(meaningString,type)
+    fun fromMeaningList(value: List<Meaning>): String = gson.toJson(value)
+
+    @TypeConverter
+    fun toMeaningList(value: String): List<Meaning> {
+        val type = object : TypeToken<List<Meaning>>() {}.type
+        return gson.fromJson(value, type)
     }
 
     @TypeConverter
-    fun fromPhonetic(phonetic: List<Phonetic>):String{
-        return gson.toJson(phonetic)
-    }
+    fun fromDefinition(value: Definition): String = gson.toJson(value)
 
     @TypeConverter
-    fun toPhonetic(phoneticString: String):List<Phonetic>{
-        val type = object : TypeToken<List<Meaning>>(){}.type
-        return gson.fromJson(phoneticString,type)
-    }
-
-    @TypeConverter
-    fun fromDefinition(definition: Definition):String{
-        return gson.toJson(definition)
-    }
-
-    @TypeConverter
-    fun toDefinition(definitionString: String):Definition{
-        val type = object : TypeToken<List<Meaning>>(){}.type
-        return gson.fromJson(definitionString,type)
+    fun toDefinition(value: String): Definition {
+        val type = object : TypeToken<Definition>() {}.type
+        return gson.fromJson(value, type)
     }
 }

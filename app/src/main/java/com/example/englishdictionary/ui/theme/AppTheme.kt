@@ -46,6 +46,11 @@ fun AppTheme(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
+        ),
+        phonetic = TextStyle(
+            fontFamily = RobotoFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 13.sp
         )
     )
 

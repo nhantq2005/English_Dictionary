@@ -10,7 +10,8 @@ import com.example.englishdictionary.feature_dictionary.domain.util.Converters
 
 @Database(
     entities = [WordItem::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class WordDatabase:RoomDatabase() {

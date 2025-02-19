@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Button
@@ -27,13 +28,13 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 
 @Composable
-fun AudioButton() {
+fun AudioButton(
+    audioUrl: String
+) {
 
-    val context = LocalContext.current
+//    val context = LocalContext.current
     var isPlaying by remember { mutableStateOf(false) }
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
-
-    val audioUrl = "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3"
 
     IconButton(
         onClick = {
@@ -58,6 +59,12 @@ fun AudioButton() {
             }
         }
     ) {
-        Icon(Icons.Default.VolumeUp, contentDescription = "Phonetic button")
+        Icon(
+            Icons.Default.VolumeUp,
+            contentDescription = "Phonetic button",
+            modifier = Modifier
+                .size(15.dp)
+                .padding(vertical = 0.dp)
+        )
     }
 }

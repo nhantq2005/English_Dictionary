@@ -17,14 +17,14 @@ interface WordDao {
     suspend fun getWordById(id:Int):WordItem?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addWord(wordItem: WordItem)
+    suspend fun addWord(wordItem: WordItem)
 
     @Delete
-    fun deleteWord(wordItem: WordItem)
+    suspend fun deleteWord(wordItem: WordItem)
 
     @Query("SELECT * FROM words_table WHERE word LIKE '%' || :keyword || '%'")
     fun getWordByKeyword(keyword:String):Flow<List<WordItem>>
 
     @Query("SELECT EXISTS(SELECT * FROM words_table WHERE word = :searchWord)")
-    fun isWordExists(searchWord: String): Boolean
+    suspend fun isWordExists(searchWord: String): Boolean
 }

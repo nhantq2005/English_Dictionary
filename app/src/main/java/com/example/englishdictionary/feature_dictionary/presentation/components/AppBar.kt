@@ -40,10 +40,10 @@ import com.example.englishdictionary.util.Screen
 @Composable
 fun AppBar(
 //    navController: NavController,
-    topBar:@Composable ()->Unit,
-    content:@Composable ()-> Unit,
+    topBar: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 //    alignment: Alignment
-){
+) {
     val items = listOf(
         NavBarItem(
             route = Screen.MainScreen.route,
@@ -68,24 +68,27 @@ fun AppBar(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                topBar()
-//                Text(text = "DEMO")
-            },
-                modifier = Modifier.padding(5.dp))
+                 topBar()
+//            TopAppBar(title = {
+//                topBar()
+////                Text(text = "DEMO")
+//            }
+////                modifier = Modifier.padding(5.dp)
+//            )
         },
         bottomBar = {
             NavigationBar(
                 containerColor = AppTheme.appColor.bottomBar,
                 modifier = Modifier.shadow(
                     elevation = 10.dp,
-                    shape = RoundedCornerShape(15.dp))
+                    shape = RoundedCornerShape(15.dp)
+                )
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    items.forEachIndexed{ _, item ->
+                    items.forEachIndexed { _, item ->
 //                        val currenRoute = navController.currentDestination?.route
                         NavigationBarItem(
 //                            selected = currenRoute==item.route,

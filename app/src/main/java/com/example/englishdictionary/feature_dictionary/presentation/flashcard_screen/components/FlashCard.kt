@@ -65,10 +65,9 @@ fun FlashCard() {
                 fontSize = 45.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold
-                )
+            )
         }
     }
-
 }
 
 

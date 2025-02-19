@@ -15,8 +15,7 @@ import com.example.englishdictionary.util.Result
 
 
 class DictionaryRepositoryImpl @Inject constructor(
-    private val dictionaryApi: DictionaryApi,
-    private val application: Application
+    private val dictionaryApi: DictionaryApi
 ): DictionaryRepository {
     override suspend fun getWordResult(
         word: String

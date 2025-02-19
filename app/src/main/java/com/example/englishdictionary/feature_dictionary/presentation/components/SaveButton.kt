@@ -20,13 +20,15 @@ import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 
 @Composable
 fun SaveButton(
-    size:Dp
+    size:Dp,
+    onClick:()->Unit
 ) {
     var saveButtonState by remember {
         mutableStateOf(false)
     }
     IconButton(onClick = {
         saveButtonState = !saveButtonState
+        onClick()
     }) {
         if (saveButtonState) {
             Icon(
@@ -50,6 +52,6 @@ fun SaveButton(
 @Composable
 fun ReviewSaveButton() {
     EnglishDictionaryTheme {
-        SaveButton(20.dp)
+//        SaveButton(20.dp)
     }
 }

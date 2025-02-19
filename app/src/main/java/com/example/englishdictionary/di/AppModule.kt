@@ -37,6 +37,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    @Provides
+    @Singleton
+    fun provideWordDatabase(app:Application): WordDatabase {
+        return Room.databaseBuilder(
+            app,
+            WordDatabase::class.java,
+            WordDatabase.DATABASE_NAME
+        ).build()
+    }
+
     private val interceptor: HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -48,7 +58,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesDictionaryApi(): DictionaryApi {
+    fun providesDictionaryApi() : DictionaryApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(DictionaryApi.BASE_URL)
@@ -57,15 +67,7 @@ object AppModule {
             .create()
     }
 
-    @Provides
-    @Singleton
-    fun provideWordDatabase(app:Application): WordDatabase {
-        return Room.databaseBuilder(
-            app,
-            WordDatabase::class.java,
-            WordDatabase.DATABASE_NAME
-        ).build()
-    }
+
 
     @Provides
     @Singleton
