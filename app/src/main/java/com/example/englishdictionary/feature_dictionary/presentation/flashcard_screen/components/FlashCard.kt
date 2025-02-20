@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SavedWordItem
 import com.example.englishdictionary.ui.theme.AppTheme
 import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 
@@ -60,12 +61,20 @@ fun FlashCard() {
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Text(
-                text = if (flipped) "Back" else "Front",
-                fontSize = 45.sp,
-                color = Color.Black,
-                fontWeight = FontWeight.SemiBold
-            )
+//            Text(
+//                text = if (flipped){
+//                    "Back"
+//                }else "Front",
+//                fontSize = 45.sp,
+//                color = Color.Black,
+//                fontWeight = FontWeight.SemiBold
+//            )
+            if(flipped){
+//                SavedWordItem(wordItem = )
+                Text(text = "BEHIND", style = AppTheme.appTypograhy.word)
+            }else{
+                Text(text = "WORD", style = AppTheme.appTypograhy.word)
+            }
         }
     }
 }

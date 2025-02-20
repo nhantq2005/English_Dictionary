@@ -57,14 +57,14 @@ fun AudioButton(
             } else {
                 mediaPlayer?.start()
             }
-        }
+        },
+        modifier = Modifier.size(15.dp)
     ) {
         Icon(
             Icons.Default.VolumeUp,
             contentDescription = "Phonetic button",
             modifier = Modifier
-                .size(15.dp)
-                .padding(vertical = 0.dp)
+//                .size(15.dp)
         )
     }
 }

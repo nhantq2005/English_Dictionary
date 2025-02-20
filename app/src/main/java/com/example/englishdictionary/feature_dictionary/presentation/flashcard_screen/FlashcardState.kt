@@ -3,7 +3,7 @@ package com.example.englishdictionary.feature_dictionary.presentation.flashcard_
 import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 
 data class FlashcardState(
-    val listWord:List<WordItem>,
-    val trueWords:Int,
-    val falseWords:Int
+    val listWord:List<WordItem> = emptyList(),
+    val trueWords:Int=0,
+    val falseWords:Int=0
 )

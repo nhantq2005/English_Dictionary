@@ -1,5 +1,6 @@
 package com.example.englishdictionary.feature_dictionary.presentation.main_screen.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -18,13 +19,13 @@ fun PhoneticItem(
     url:String
 ){
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
         Text(
             text = phonetic,
             style = AppTheme.appTypograhy.phonetic
         )
-//        Spacer(modifier = Modifier.padding(horizontal = 3.dp))
         if(url.isNotEmpty()) {
             AudioButton(audioUrl = url)
         }

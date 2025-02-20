@@ -11,7 +11,8 @@ data class AppTypography(
     val title: TextStyle = TextStyle.Default,
     val navLabel: TextStyle = TextStyle.Default,
     val placeholder: TextStyle = TextStyle.Default,
-    val phonetic: TextStyle = TextStyle.Default
+    val phonetic: TextStyle = TextStyle.Default,
+    val countValue:TextStyle = TextStyle.Default
 )
 
 val LocalAppTypography = staticCompositionLocalOf {

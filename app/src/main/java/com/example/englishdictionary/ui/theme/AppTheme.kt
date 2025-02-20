@@ -20,7 +20,7 @@ fun AppTheme(
         partOfSpeech = TextStyle(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 12.sp
+            fontSize = 18.sp
         ),
         word = TextStyle(
             fontFamily = RobotoFamily,
@@ -30,7 +30,7 @@ fun AppTheme(
         navLabel = TextStyle(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp
+            fontSize = 17.sp
         ),
         keyword = TextStyle(
             fontFamily = RobotoFamily,
@@ -40,7 +40,7 @@ fun AppTheme(
         definition = TextStyle(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
+            fontSize = 17.sp
         ),
         placeholder = TextStyle(
             fontFamily = RobotoFamily,
@@ -50,7 +50,12 @@ fun AppTheme(
         phonetic = TextStyle(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Normal,
-            fontSize = 13.sp
+            fontSize = 14.sp
+        ),
+        countValue = TextStyle(
+            fontFamily = RobotoFamily,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp
         )
     )
 

@@ -2,7 +2,9 @@ package com.example.englishdictionary.feature_dictionary.presentation.detail_wor
 
 import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 
-data class DetailState(
-    val wordItem: WordItem?=null,
-    val isSavedWord:Boolean=false
-)
+sealed class DetailEvent {
+    data class SaveWord(val wordItem: WordItem) : DetailEvent()
+
+    data class UnsaveWord(val wordItem: WordItem) : DetailEvent()
+
+}

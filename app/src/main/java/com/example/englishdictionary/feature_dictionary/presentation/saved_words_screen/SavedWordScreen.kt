@@ -42,7 +42,7 @@ import com.example.englishdictionary.ui.theme.AppTheme
 fun SavedWordScreen(
     viewModel: SavedWordsViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.savedWordSate.value
 
     AppBar(
         topBar = {
@@ -62,7 +62,6 @@ fun SavedWordScreen(
                 )
             }
         }
-
     ) {
         Box(
             modifier = Modifier

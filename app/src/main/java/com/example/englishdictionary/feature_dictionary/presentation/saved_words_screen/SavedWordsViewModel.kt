@@ -17,8 +17,8 @@ import javax.inject.Inject
 class SavedWordsViewModel @Inject constructor(
     private val wordUseCases: WordUseCases
 ):ViewModel() {
-    private val _state = mutableStateOf(SavedWordState())
-    val state:State<SavedWordState> = _state
+    private val _savedWordState = mutableStateOf(SavedWordState())
+    val savedWordSate:State<SavedWordState> = _savedWordState
 
     private var getSavedWordsJob: Job? = null
 
@@ -29,7 +29,7 @@ class SavedWordsViewModel @Inject constructor(
     fun onEvent(event: SavedWordEvent){
         when(event){
             is SavedWordEvent.EnteredKeyword -> {
-                _state.value = state.value.copy(
+                _savedWordState.value = savedWordSate.value.copy(
                     keyword = event.keyword
                 )
             }
@@ -37,9 +37,9 @@ class SavedWordsViewModel @Inject constructor(
                 //Cancel get saved word
                 getSavedWordsJob?.cancel()
                 //Get word by search keyword
-                getSavedWordsJob=wordUseCases.findWord(state.value.keyword)
+                getSavedWordsJob=wordUseCases.findWord(savedWordSate.value.keyword)
                     .onEach { words ->
-                        _state.value = state.value.copy(
+                        _savedWordState.value = savedWordSate.value.copy(
                             savedWords = words
                         )
                     }.launchIn(viewModelScope)
@@ -56,7 +56,7 @@ class SavedWordsViewModel @Inject constructor(
         getSavedWordsJob?.cancel()
         getSavedWordsJob = wordUseCases.getWords()
             .onEach { words ->
-                _state.value = state.value.copy(
+                _savedWordState.value = savedWordSate.value.copy(
                     savedWords = words
                 )
             }.launchIn(viewModelScope)

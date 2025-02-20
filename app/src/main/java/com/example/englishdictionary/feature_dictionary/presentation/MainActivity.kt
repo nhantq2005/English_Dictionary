@@ -7,8 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.FlashCardScreen
-import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.SlideLeftCardWithOffset
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.MainScreen
 import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordScreen
 import com.example.englishdictionary.ui.theme.AppTheme
@@ -22,24 +22,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
 //                SavedWordScreen()
-                SavedWordScreen()
+                MainScreen()
+//                val navController= rememberNavController()
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     EnglishDictionaryTheme {
-        Greeting("Android")
     }
 }

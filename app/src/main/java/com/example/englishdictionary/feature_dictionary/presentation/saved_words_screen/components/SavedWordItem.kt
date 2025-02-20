@@ -1,6 +1,7 @@
 package com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,7 +34,6 @@ import com.example.englishdictionary.ui.theme.AppTheme
 fun SavedWordItem(
     wordItem: WordItem
 ) {
-    Log.e("COUNT", wordItem.meanings.size.toString())
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +41,10 @@ fun SavedWordItem(
             .shadow(
                 elevation = 5.dp,
                 shape = RoundedCornerShape(10.dp)
-            ),
+            )
+            .clickable {
+
+            },
         colors = CardDefaults.cardColors(Color.White)
     ) {
         Column(
@@ -74,6 +78,7 @@ fun SavedWordItem(
                 }
                 Spacer(modifier = Modifier.padding(vertical = 7.dp))
             }
+
         }
 
     }
