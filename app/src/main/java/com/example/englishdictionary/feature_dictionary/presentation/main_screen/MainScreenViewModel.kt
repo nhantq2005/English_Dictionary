@@ -1,12 +1,7 @@
 package com.example.englishdictionary.feature_dictionary.presentation.main_screen
 
-import android.util.Log
-import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.englishdictionary.feature_dictionary.domain.model.Definition
-import com.example.englishdictionary.feature_dictionary.domain.model.Meaning
-import com.example.englishdictionary.feature_dictionary.domain.model.Phonetic
 import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 import com.example.englishdictionary.feature_dictionary.domain.repository.DictionaryRepository
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.WordUseCases
@@ -17,8 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.englishdictionary.util.Result
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 
 @HiltViewModel
@@ -29,27 +22,7 @@ class MainScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(MainState())
     val state = _state.asStateFlow()
 
-
-    private var currentWordResult: WordItem?=null
-//    = WordItem(
-//        word = "WIN",
-//        phonetics = listOf(
-//            Phonetic(
-//                audio = "1230",
-//                text = "498"
-//            )
-//        ),
-//        meanings = listOf(
-//            Meaning(
-//                partOfSpeech = "A",
-//                definitions = Definition(definition = "1", example = "1"),
-//                antonyms = listOf("1","8"),
-//                synonyms = listOf("1","8")
-//            )
-//
-//        ),
-//        timeStamp = 0
-//    )
+    private var currentWordResult: WordItem? = null
 
     private var searchJob: Job? = null
 
@@ -62,26 +35,31 @@ class MainScreenViewModel @Inject constructor(
         searchJob = viewModelScope.launch {
             loadWordResult()
         }
+
+//        _state.value=state.value.copy(
+//            isSavedWord = state.value.wordItem?.let { MainEvent.CheckWordExist(it.word) }
+//                ?.let { onEvent(it) }
+//        )
     }
 
     fun onEvent(event: MainEvent) {
         when (event) {
-            is MainEvent.enteredWord -> {
+            is MainEvent.EnteredWord -> {
                 _state.value = state.value.copy(
                     searchWord = event.word
                 )
             }
 
-            MainEvent.onSearchClick -> {
+            MainEvent.OnSearchClick -> {
                 searchJob?.cancel()
                 searchJob = viewModelScope.launch {
                     loadWordResult()
                 }
             }
 
-            is MainEvent.saveWord -> {
+            is MainEvent.SaveWord -> {
                 viewModelScope.launch {
-//currentWordResult?.let { Log.e("SHOW DATA", it.word) }
+            //Catch exception if do not have word
                     try {
                         currentWordResult?.let {
                             WordItem(
@@ -95,10 +73,16 @@ class MainScreenViewModel @Inject constructor(
                                 it
                             )
                         }
-
                     } catch (_: Exception) {
-
                     }
+                }
+            }
+
+            is MainEvent.CheckWordExist -> {
+                viewModelScope.launch {
+                    _state.value=state.value.copy(
+                        isSavedWord = wordUseCases.checkWordExist(event.word)
+                    )
                 }
             }
         }

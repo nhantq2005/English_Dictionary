@@ -40,10 +40,11 @@ import com.example.englishdictionary.util.Screen
 @Composable
 fun AppBar(
 //    navController: NavController,
+    containerColor: Color,
     topBar: @Composable () -> Unit,
-    content: @Composable () -> Unit,
-//    alignment: Alignment
+    content: @Composable () -> Unit
 ) {
+//    List items in bottom bar
     val items = listOf(
         NavBarItem(
             route = Screen.MainScreen.route,
@@ -64,17 +65,10 @@ fun AppBar(
             isSelected = false
         )
     )
-
-
+//  UI App bar
     Scaffold(
         topBar = {
-                 topBar()
-//            TopAppBar(title = {
-//                topBar()
-////                Text(text = "DEMO")
-//            }
-////                modifier = Modifier.padding(5.dp)
-//            )
+            topBar()
         },
         bottomBar = {
             NavigationBar(
@@ -92,7 +86,7 @@ fun AppBar(
 //                        val currenRoute = navController.currentDestination?.route
                         NavigationBarItem(
 //                            selected = currenRoute==item.route,
-                            selected = true,
+                            selected = item.isSelected,
                             onClick = { /*navController.navigate(item.route)*/ },
                             icon = {
                                 Icon(
@@ -111,22 +105,13 @@ fun AppBar(
                 }
             }
         },
+        containerColor = containerColor
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .padding(paddingValues)
-//                .fillMaxSize()
-//                .shadow(15.dp)
-//
-//                .background(
-//                    AppTheme.appColor.flashcard,
-//                    shape = RoundedCornerShape(topEnd = 15.dp, topStart = 15.dp)
-//                )
-//                .border(2.dp, color = Color.Black)
-
         ) {
             content()
-//            FlashCard()
         }
     }
 }

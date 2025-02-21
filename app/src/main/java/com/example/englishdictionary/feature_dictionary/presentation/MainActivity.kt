@@ -21,8 +21,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-//                SavedWordScreen()
                 MainScreen()
+//                FlashCardScreen()
 //                val navController= rememberNavController()
             }
         }

@@ -72,7 +72,9 @@ fun FlashCardScreen() {
                 style = AppTheme.appTypograhy.title
             )
         }
-    }) {
+    },
+        containerColor = AppTheme.appColor.background
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -119,7 +121,7 @@ fun FlashCardScreen() {
                 ) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = null,
+                        contentDescription = "Forget word button",
                         tint = AppTheme.appColor.wrong,
                         modifier = Modifier
                             .size(height = 65.dp, width = 100.dp)
@@ -137,7 +139,7 @@ fun FlashCardScreen() {
 
                     Icon(
                         imageVector = Icons.Default.Check,
-                        contentDescription = null,
+                        contentDescription = "Remember word button",
                         tint = AppTheme.appColor.right,
                         modifier = Modifier
                             .size(height = 65.dp, width = 100.dp)

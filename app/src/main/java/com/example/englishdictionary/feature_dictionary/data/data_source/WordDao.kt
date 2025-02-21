@@ -25,6 +25,6 @@ interface WordDao {
     @Query("SELECT * FROM words_table WHERE word LIKE '%' || :keyword || '%'")
     fun getWordByKeyword(keyword:String):Flow<List<WordItem>>
 
-    @Query("SELECT EXISTS(SELECT * FROM words_table WHERE word = :searchWord)")
-    suspend fun isWordExists(searchWord: String): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM words_table WHERE word = :word)")
+    suspend fun isWordExists(word: String): Boolean
 }

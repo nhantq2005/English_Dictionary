@@ -60,7 +60,7 @@ fun SavedWordItem(
                     text = wordItem.word,
                     style = AppTheme.appTypograhy.word.copy(fontSize = 30.sp)
                 )
-                SaveButton(size = 30.dp) {
+                SaveButton(size = 30.dp,isSaved = true) {
 
                 }
             }

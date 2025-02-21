@@ -61,7 +61,8 @@ fun SavedWordScreen(
                     style = AppTheme.appTypograhy.title.copy(fontSize = 30.sp)
                 )
             }
-        }
+        },
+        containerColor = AppTheme.appColor.header
     ) {
         Box(
             modifier = Modifier

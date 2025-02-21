@@ -21,6 +21,7 @@ import com.example.englishdictionary.ui.theme.EnglishDictionaryTheme
 @Composable
 fun SaveButton(
     size:Dp,
+    isSaved:Boolean,
     onClick:()->Unit
 ) {
     var saveButtonState by remember {
@@ -30,7 +31,7 @@ fun SaveButton(
         saveButtonState = !saveButtonState
         onClick()
     }) {
-        if (saveButtonState) {
+        if (isSaved) {
             Icon(
                 Icons.Default.Bookmark,
                 contentDescription = "Save icon",

@@ -3,7 +3,8 @@ package com.example.englishdictionary.feature_dictionary.presentation.main_scree
 import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 
 sealed class MainEvent {
-    data class enteredWord(val word:String):MainEvent()
-    data class saveWord(val wordItem: WordItem):MainEvent()
-    object onSearchClick:MainEvent()
+    data class EnteredWord(val word:String):MainEvent()
+    data class SaveWord(val wordItem: WordItem):MainEvent()
+    object OnSearchClick:MainEvent()
+    data class CheckWordExist(val word:String):MainEvent()
 }

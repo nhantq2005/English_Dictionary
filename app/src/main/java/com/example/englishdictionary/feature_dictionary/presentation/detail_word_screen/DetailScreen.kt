@@ -51,11 +51,13 @@ fun DetailScreen(
                 text = "CANCEL",
                 style = AppTheme.appTypograhy.word
             )
-            SaveButton(size = 35.dp) {
+            SaveButton(size = 35.dp,isSaved = true) {
 
             }
         }
-    }) {
+    },
+        containerColor = AppTheme.appColor.header
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -84,7 +86,7 @@ fun DetailScreen(
                                 style = AppTheme.appTypograhy.word
                             )
                         }
-                        SaveButton(size = 35.dp){
+                        SaveButton(size = 35.dp,isSaved = true){
 
                         }
                     }
