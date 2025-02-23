@@ -26,5 +26,6 @@ interface WordDao {
     fun getWordByKeyword(keyword:String):Flow<List<WordItem>>
 
     @Query("SELECT EXISTS(SELECT * FROM words_table WHERE word = :word)")
+//@Query("SELECT EXISTS(SELECT 1 FROM words_table WHERE word = :word)")
     suspend fun isWordExists(word: String): Boolean
 }

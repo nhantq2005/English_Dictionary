@@ -1,7 +1,7 @@
 package com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,15 +31,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
+import com.example.englishdictionary.feature_dictionary.presentation.components.Warning
 import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SavedWordItem
 import com.example.englishdictionary.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedWordScreen(
+    navController: NavController,
     viewModel: SavedWordsViewModel = hiltViewModel()
 ) {
     val state = viewModel.savedWordSate.value
@@ -62,7 +64,8 @@ fun SavedWordScreen(
                 )
             }
         },
-        containerColor = AppTheme.appColor.header
+        containerColor = AppTheme.appColor.header,
+        navController = navController
     ) {
         Box(
             modifier = Modifier
@@ -73,17 +76,18 @@ fun SavedWordScreen(
                     shape = RoundedCornerShape(topEnd = 15.dp, topStart = 15.dp)
                 )
                 .padding(top = 15.dp)
-                .clickable {
-
-                }
         ) {
             Column(
                 Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = state.keyword,
+                    onValueChange = {
+                        viewModel.onEvent(SavedWordEvent.EnteredKeyword(it))
+                        Log.e("DEMO", state.keyword)
+                        viewModel.onEvent(SavedWordEvent.FindWord(it))
+                    },
                     modifier = Modifier
                         .fillMaxWidth(0.95f)
                         .shadow(elevation = 7.dp, shape = RoundedCornerShape(18.dp)),
@@ -108,9 +112,19 @@ fun SavedWordScreen(
                     shape = RoundedCornerShape(18.dp),
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(state.savedWords){word ->
-                        SavedWordItem(word)
+                if (state.savedWords.isEmpty()) {
+                    Warning()
+                } else {
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(
+                            if (state.keyword != "") {
+                                state.searchWord
+                            } else {
+                                state.savedWords
+                            }
+                        ) { word ->
+                            SavedWordItem(word, viewModel, navController)
+                        }
                     }
                 }
 
@@ -125,6 +139,6 @@ fun SavedWordScreen(
 @Composable
 fun PreviewSavedWordScreen() {
     AppTheme {
-        SavedWordScreen()
+//        SavedWordScreen()
     }
 }

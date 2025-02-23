@@ -14,6 +14,8 @@ import com.example.englishdictionary.feature_dictionary.domain.use_cases.GetWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.SaveWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.UnsaveWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.WordUseCases
+import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.FlashcardViewModel
+import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordState
 //import com.example.englishdictionary.feature_dictionary.data.repository.WordRepositoryImpl
 //import com.example.englishdictionary.feature_dictionary.domain.repository.WordRepository
 //import com.example.englishdictionary.feature_dictionary.domain.use_cases.CheckWordExist
@@ -37,6 +39,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    //Build room database
     @Provides
     @Singleton
     fun provideWordDatabase(app:Application): WordDatabase {
@@ -66,8 +70,6 @@ object AppModule {
             .build()
             .create()
     }
-
-
 
     @Provides
     @Singleton

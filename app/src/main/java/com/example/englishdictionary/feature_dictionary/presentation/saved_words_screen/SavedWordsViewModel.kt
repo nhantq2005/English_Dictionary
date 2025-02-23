@@ -40,7 +40,7 @@ class SavedWordsViewModel @Inject constructor(
                 getSavedWordsJob=wordUseCases.findWord(savedWordSate.value.keyword)
                     .onEach { words ->
                         _savedWordState.value = savedWordSate.value.copy(
-                            savedWords = words
+                            searchWord = words
                         )
                     }.launchIn(viewModelScope)
             }

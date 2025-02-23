@@ -39,7 +39,7 @@ import com.example.englishdictionary.util.Screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBar(
-//    navController: NavController,
+    navController: NavController,
     containerColor: Color,
     topBar: @Composable () -> Unit,
     content: @Composable () -> Unit
@@ -83,11 +83,10 @@ fun AppBar(
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
                     items.forEachIndexed { _, item ->
-//                        val currenRoute = navController.currentDestination?.route
+                        val currenRoute = navController.currentDestination?.route
                         NavigationBarItem(
-//                            selected = currenRoute==item.route,
-                            selected = item.isSelected,
-                            onClick = { /*navController.navigate(item.route)*/ },
+                            selected = currenRoute==item.route,
+                            onClick = { navController.navigate(item.route) },
                             icon = {
                                 Icon(
                                     item.icon,

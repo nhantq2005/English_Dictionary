@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishdictionary.feature_dictionary.domain.repository.DictionaryRepository
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.WordUseCases
+import com.example.englishdictionary.feature_dictionary.presentation.main_screen.MainEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,18 +20,20 @@ class DetailViewModel @Inject constructor(
     private val _detailSate = mutableStateOf(DetailState())
     val detailState: State<DetailState> = _detailSate
 
-    private var currentWordId: Int? = null
-
     init {
         savedStateHandle.get<Int>("wordId")?.let { wordId ->
-            viewModelScope.launch {
-                wordUseCases.getWord(wordId)?.also {
-                    _detailSate.value = detailState.value.copy(
-                        wordItem = it
-                    )
+            if(wordId!=-1) {
+                viewModelScope.launch {
+                    wordUseCases.getWord(wordId)?.also {
+                        _detailSate.value = detailState.value.copy(
+                            wordItem = it
+                        )
+                    }
                 }
             }
         }
+
+        detailState.value.wordItem?.let { DetailEvent.CheckWordExist(it.word) }?.let { onEvent(it) }
     }
 
     fun onEvent(event: DetailEvent) {
@@ -43,6 +46,14 @@ class DetailViewModel @Inject constructor(
             is DetailEvent.UnsaveWord -> {
                 viewModelScope.launch {
                     wordUseCases.unsaveWord(event.wordItem)
+                }
+            }
+
+            is DetailEvent.CheckWordExist -> {
+                viewModelScope.launch {
+                    _detailSate.value = detailState.value.copy(
+                        isSavedWord = wordUseCases.checkWordExist(event.word.lowercase())
+                    )
                 }
             }
         }

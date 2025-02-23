@@ -28,6 +28,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -35,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.MeaningItem
@@ -43,54 +47,64 @@ import com.example.englishdictionary.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    val mainViewModel = hiltViewModel<MainScreenViewModel>()
+fun MainScreen(
+    navController: NavController
+) {
+    val mainViewModel = hiltViewModel<MainViewModel>()
     val state by mainViewModel.state.collectAsState()
 
-    AppBar(topBar = {
-        CenterAlignedTopAppBar(
-            title = {
-                TextField(
-                    value = state.searchWord,
-                    onValueChange = {
-                        mainViewModel.onEvent(
-                            MainEvent.EnteredWord(it)
-                        )
-                    },
-                    maxLines = 1,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .shadow(elevation = 7.dp, shape = RoundedCornerShape(18.dp)),
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = AppTheme.appColor.textField,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        cursorColor = AppTheme.appColor.navIcon
-                    ),
-                    placeholder = {
-                        Text(
-                            text = "Word",
-                            style = AppTheme.appTypograhy.placeholder
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            Icons.Default.Search,
-                            contentDescription = "Search Icon",
-                            modifier = Modifier.clickable {
-                                mainViewModel.onEvent(
-                                    MainEvent.OnSearchClick
-                                )
-                            }
-                        )
-                    },
-                    shape = RoundedCornerShape(18.dp),
-                )
-            },
-            modifier = Modifier.padding(vertical = 20.dp)
-        )
-    },
-        containerColor = Color.White
+    AppBar(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    TextField(
+                        value = state.searchWord,
+                        onValueChange = {
+                            mainViewModel.onEvent(
+                                MainEvent.EnteredWord(it)
+                            )
+                            mainViewModel.onEvent(
+                                MainEvent.OnSearchClick
+                            )
+                            mainViewModel.onEvent(
+                                MainEvent.CheckWordExist(it)
+                            )
+                        },
+                        maxLines = 1,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .shadow(elevation = 7.dp, shape = RoundedCornerShape(18.dp)),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = AppTheme.appColor.textField,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = AppTheme.appColor.navIcon
+                        ),
+                        placeholder = {
+                            Text(
+                                text = "Word",
+                                style = AppTheme.appTypograhy.placeholder
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                Icons.Default.Search,
+                                contentDescription = "Search Icon",
+                                modifier = Modifier.clickable {
+                                    mainViewModel.onEvent(
+                                        MainEvent.OnSearchClick
+                                    )
+                                }
+                            )
+                        },
+                        shape = RoundedCornerShape(18.dp),
+                    )
+                },
+                modifier = Modifier.padding(vertical = 20.dp)
+            )
+        },
+        containerColor = Color.White,
+        navController = navController
     ) {
         Box(
             modifier = Modifier
@@ -120,18 +134,19 @@ fun MainScreen() {
                         )
                         SaveButton(
                             size = 35.dp,
-//                            isSaved = mainViewModel.onEvent(
-//                                MainEvent.CheckWordExist(state.wordItem.word)
-//                            )
-                            isSaved = true
+                            isSaved = state.isSavedWord
                         ) {
-                            mainViewModel.onEvent(
-                                MainEvent.SaveWord(wordItem)
-                            )
-//                            Log.e("SHOW","it.word screen")
+                            if (state.isSavedWord) {
+                                mainViewModel.onEvent(
+                                    MainEvent.UnsaveWord(wordItem)
+                                )
+                            } else {
+                                mainViewModel.onEvent(
+                                    MainEvent.SaveWord(wordItem)
+                                )
+                            }
                         }
                     }
-                    Spacer(modifier = Modifier.padding(vertical = 5.dp))
                     //Show phonetic and pronunciation
                     LazyRow(
                         contentPadding = PaddingValues(vertical = 5.dp),
@@ -150,6 +165,7 @@ fun MainScreen() {
                             }
                         }
                     }
+                    Spacer(modifier = Modifier.padding(vertical = 5.dp))
                     //Show meaning, example,... of word
                     if (state.isLoading) {
 //                        Show circle proccess when load data
@@ -176,6 +192,7 @@ fun MainScreen() {
         }
     }
 }
+
 
 //@Preview(showBackground = true)
 //@Composable

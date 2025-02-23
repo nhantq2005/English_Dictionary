@@ -20,7 +20,7 @@ fun AppTheme(
         partOfSpeech = TextStyle(
             fontFamily = RobotoFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
+            fontSize = 20.sp
         ),
         word = TextStyle(
             fontFamily = RobotoFamily,

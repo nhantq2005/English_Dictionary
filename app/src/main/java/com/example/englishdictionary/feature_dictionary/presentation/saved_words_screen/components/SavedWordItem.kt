@@ -24,15 +24,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 import com.example.englishdictionary.feature_dictionary.presentation.components.PartOfSpeechItem
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.MeaningItem
+import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordEvent
+import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordsViewModel
 import com.example.englishdictionary.ui.theme.AppTheme
+import com.example.englishdictionary.util.Screen
 
 @Composable
 fun SavedWordItem(
-    wordItem: WordItem
+    wordItem: WordItem,
+    viewModel: SavedWordsViewModel,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
@@ -43,7 +50,9 @@ fun SavedWordItem(
                 shape = RoundedCornerShape(10.dp)
             )
             .clickable {
-
+                navController.navigate(
+                    Screen.DetailScreen.route+
+                        "?wordId=${wordItem.id}")
             },
         colors = CardDefaults.cardColors(Color.White)
     ) {
@@ -61,7 +70,7 @@ fun SavedWordItem(
                     style = AppTheme.appTypograhy.word.copy(fontSize = 30.sp)
                 )
                 SaveButton(size = 30.dp,isSaved = true) {
-
+                    viewModel.onEvent(SavedWordEvent.UnsaveWord(wordItem))
                 }
             }
 //            LazyColum -> Error in size of Meaning

@@ -15,7 +15,7 @@ import com.example.englishdictionary.util.Result
 import kotlinx.coroutines.flow.update
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val wordUseCases: WordUseCases,
     private val dictionaryRepository: DictionaryRepository
 ) : ViewModel() {
@@ -36,10 +36,8 @@ class MainScreenViewModel @Inject constructor(
             loadWordResult()
         }
 
-//        _state.value=state.value.copy(
-//            isSavedWord = state.value.wordItem?.let { MainEvent.CheckWordExist(it.word) }
-//                ?.let { onEvent(it) }
-//        )
+        onEvent(MainEvent.CheckWordExist(state.value.searchWord))
+
     }
 
     fun onEvent(event: MainEvent) {
@@ -59,7 +57,7 @@ class MainScreenViewModel @Inject constructor(
 
             is MainEvent.SaveWord -> {
                 viewModelScope.launch {
-            //Catch exception if do not have word
+                    //Catch exception if do not have word
                     try {
                         currentWordResult?.let {
                             WordItem(
@@ -68,6 +66,7 @@ class MainScreenViewModel @Inject constructor(
                                 phonetics = currentWordResult!!.phonetics,
                                 meanings = currentWordResult!!.meanings
                             )
+
                         }?.let {
                             wordUseCases.saveWord(
                                 it
@@ -75,13 +74,26 @@ class MainScreenViewModel @Inject constructor(
                         }
                     } catch (_: Exception) {
                     }
+                    _state.value = state.value.copy(
+                        isSavedWord = wordUseCases.checkWordExist(currentWordResult!!.word)
+                    )
                 }
             }
 
             is MainEvent.CheckWordExist -> {
                 viewModelScope.launch {
-                    _state.value=state.value.copy(
-                        isSavedWord = wordUseCases.checkWordExist(event.word)
+                    _state.value = state.value.copy(
+                        isSavedWord = wordUseCases.checkWordExist(event.word.lowercase())
+                    )
+                }
+            }
+
+            is MainEvent.UnsaveWord -> {
+                viewModelScope.launch {
+                    wordUseCases.unsaveWord(event.word)
+
+                    _state.value = state.value.copy(
+                        isSavedWord = wordUseCases.checkWordExist(event.word.word)
                     )
                 }
             }
@@ -114,9 +126,5 @@ class MainScreenViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    sealed class UiEvent {
-        object SaveWord : UiEvent()
     }
 }

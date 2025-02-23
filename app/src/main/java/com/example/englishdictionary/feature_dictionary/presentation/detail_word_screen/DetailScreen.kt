@@ -23,8 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.MeaningItem
@@ -34,7 +36,8 @@ import com.example.englishdictionary.ui.theme.AppTheme
 
 @Composable
 fun DetailScreen(
-    viewModel: DetailViewModel = hiltViewModel()
+    viewModel: DetailViewModel = hiltViewModel(),
+    navController: NavController
 ) {
 
     val detailState = viewModel.detailState.value
@@ -47,16 +50,31 @@ fun DetailScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "CANCEL",
-                style = AppTheme.appTypograhy.word
-            )
-            SaveButton(size = 35.dp,isSaved = true) {
-
+            detailState.wordItem?.let {
+                Text(
+                    text = it.word,
+                    style = AppTheme.appTypograhy.word.copy(fontSize=45.sp)
+                )
+            }
+            SaveButton(size = 35.dp,isSaved = detailState.isSavedWord) {
+                if (detailState.isSavedWord) {
+                    detailState.wordItem?.let { DetailEvent.UnsaveWord(it) }?.let {
+                        viewModel.onEvent(
+                            it
+                        )
+                    }
+                } else {
+                    detailState.wordItem?.let { DetailEvent.SaveWord(it) }?.let {
+                        viewModel.onEvent(
+                            it
+                        )
+                    }
+                }
             }
         }
     },
-        containerColor = AppTheme.appColor.header
+        containerColor = AppTheme.appColor.header,
+        navController = navController
     ) {
         Box(
             modifier = Modifier
@@ -75,21 +93,6 @@ fun DetailScreen(
                         .fillMaxSize()
                         .padding(10.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        if (wordItem != null) {
-                            Text(
-                                text = wordItem.word,
-                                style = AppTheme.appTypograhy.word
-                            )
-                        }
-                        SaveButton(size = 35.dp,isSaved = true){
-
-                        }
-                    }
                     Spacer(modifier = Modifier.padding(vertical = 5.dp))
                     //Show phonetic and pronunciation
                     LazyRow(
@@ -136,6 +139,6 @@ fun DetailScreen(
 @Composable
 fun PreviewDetailScreen() {
     AppTheme {
-        DetailScreen()
+//        DetailScreen()
     }
 }

@@ -10,7 +10,7 @@ class GetWords(
 ) {
     operator fun invoke(): Flow<List<WordItem>>{
         return wordRepository.getWords().map { word ->
-            word.sortedBy { it.timeStamp }
+            word.sortedBy { -it.timeStamp }
         }
     }
 }
