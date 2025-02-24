@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -45,13 +46,5 @@ fun SaveButton(
                 modifier = Modifier.size(size)
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ReviewSaveButton() {
-    EnglishDictionaryTheme {
-//        SaveButton(20.dp)
     }
 }

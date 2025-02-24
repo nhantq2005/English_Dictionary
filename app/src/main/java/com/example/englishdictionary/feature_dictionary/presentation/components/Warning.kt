@@ -35,11 +35,3 @@ fun Warning(){
         Text(text = "Do not have saved word !!!", style = AppTheme.appTypograhy.definition)
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewWarning(){
-    AppTheme {
-        Warning()
-    }
-}

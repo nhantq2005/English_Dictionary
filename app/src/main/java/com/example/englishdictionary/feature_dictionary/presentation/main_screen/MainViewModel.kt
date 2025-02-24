@@ -19,6 +19,7 @@ class MainViewModel @Inject constructor(
     private val wordUseCases: WordUseCases,
     private val dictionaryRepository: DictionaryRepository
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(MainState())
     val state = _state.asStateFlow()
 
@@ -36,6 +37,7 @@ class MainViewModel @Inject constructor(
             loadWordResult()
         }
 
+//      Check word have been saved before
         onEvent(MainEvent.CheckWordExist(state.value.searchWord))
 
     }
@@ -88,15 +90,6 @@ class MainViewModel @Inject constructor(
                 }
             }
 
-            is MainEvent.UnsaveWord -> {
-                viewModelScope.launch {
-                    wordUseCases.unsaveWord(event.word)
-
-                    _state.value = state.value.copy(
-                        isSavedWord = wordUseCases.checkWordExist(event.word.word)
-                    )
-                }
-            }
         }
     }
 

@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,13 +30,11 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -97,6 +97,14 @@ fun MainScreen(
                                 }
                             )
                         },
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Search
+                        ),
+                        keyboardActions = KeyboardActions(onSearch = {
+                            mainViewModel.onEvent(
+                                MainEvent.OnSearchClick
+                            )
+                        }),
                         shape = RoundedCornerShape(18.dp),
                     )
                 },
@@ -136,11 +144,9 @@ fun MainScreen(
                             size = 35.dp,
                             isSaved = state.isSavedWord
                         ) {
-                            if (state.isSavedWord) {
-                                mainViewModel.onEvent(
-                                    MainEvent.UnsaveWord(wordItem)
-                                )
-                            } else {
+//                            Check saved word
+//                            Can not save the word again
+                            if (!state.isSavedWord) {
                                 mainViewModel.onEvent(
                                     MainEvent.SaveWord(wordItem)
                                 )
@@ -152,6 +158,7 @@ fun MainScreen(
                         contentPadding = PaddingValues(vertical = 5.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+//                        Show list phonetic
                         items(wordItem.phonetics.size) { index ->
                             wordItem.phonetics[index].let {
                                 it.text?.let { it1 ->
@@ -176,8 +183,8 @@ fun MainScreen(
                                 color = AppTheme.appColor.iconButton
                             )
                         }
-
                     } else {
+//                        Load word success
                         LazyColumn(contentPadding = PaddingValues(horizontal = 10.dp)) {
                             items(wordItem.meanings.size) { index ->
                                 MeaningItem(
@@ -192,12 +199,3 @@ fun MainScreen(
         }
     }
 }
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewMainScreen() {
-//    AppTheme {
-//        MainScreen()
-//    }
-//}

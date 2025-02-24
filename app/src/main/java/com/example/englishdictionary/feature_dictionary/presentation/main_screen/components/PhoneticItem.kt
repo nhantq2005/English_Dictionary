@@ -32,11 +32,3 @@ fun PhoneticItem(
     }
     Spacer(modifier = Modifier.padding(horizontal = 10.dp))
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPhoneticItem(){
-    AppTheme {
-        PhoneticItem(phonetic = "/ˈkænsl̩/", url = "A")
-    }
-}

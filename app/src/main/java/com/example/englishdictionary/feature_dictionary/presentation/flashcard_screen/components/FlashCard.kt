@@ -86,12 +86,3 @@ fun FlashCard(
         }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewFlashCard() {
-    EnglishDictionaryTheme {
-//        FlashCard()
-    }
-}

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Search
@@ -28,12 +29,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
+import com.example.englishdictionary.feature_dictionary.presentation.components.SearchTextField
 import com.example.englishdictionary.feature_dictionary.presentation.components.Warning
 import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SavedWordItem
 import com.example.englishdictionary.ui.theme.AppTheme
@@ -109,15 +112,20 @@ fun SavedWordScreen(
                             contentDescription = "Search Icon"
                         )
                     },
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done
+                    ),
                     shape = RoundedCornerShape(18.dp),
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 if (state.savedWords.isEmpty()) {
+//                    Warning saved word list is empty
                     Warning()
                 } else {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(
                             if (state.keyword != "") {
+//                                If user type keyword -> Show list word search from keyword
                                 state.searchWord
                             } else {
                                 state.savedWords

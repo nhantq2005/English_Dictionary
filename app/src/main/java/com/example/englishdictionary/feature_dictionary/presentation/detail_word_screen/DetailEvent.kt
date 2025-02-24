@@ -7,5 +7,4 @@ sealed class DetailEvent {
     data class SaveWord(val wordItem: WordItem) : DetailEvent()
     data class UnsaveWord(val wordItem: WordItem) : DetailEvent()
     data class CheckWordExist(val word:String): DetailEvent()
-
 }

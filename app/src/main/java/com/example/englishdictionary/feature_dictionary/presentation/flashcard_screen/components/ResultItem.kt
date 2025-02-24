@@ -75,12 +75,3 @@ fun ResultItem(
         }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewResultItem() {
-    AppTheme {
-        ResultItem(countRightWord = 4, countWrongWord = 15)
-    }
-}

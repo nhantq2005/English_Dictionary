@@ -4,5 +4,5 @@ import com.example.englishdictionary.feature_dictionary.domain.model.WordItem
 
 data class DetailState(
     val wordItem: WordItem?=null,
-    val isSavedWord:Boolean=false
+    val isSavedWord:Boolean=true
 )

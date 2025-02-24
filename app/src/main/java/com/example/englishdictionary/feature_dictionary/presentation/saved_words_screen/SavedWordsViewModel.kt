@@ -52,6 +52,7 @@ class SavedWordsViewModel @Inject constructor(
         }
     }
 
+//    Get word from roomdatabase
     private fun getSavedWords(){
         getSavedWordsJob?.cancel()
         getSavedWordsJob = wordUseCases.getWords()

@@ -36,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -53,18 +52,21 @@ import kotlinx.coroutines.launch
 @Composable
 fun FlashCardScreen(
     navController: NavController,
-    flashCardViewModel: FlashcardViewModel = hiltViewModel(),
     savedWordsViewModel: SavedWordsViewModel = hiltViewModel()
 
 ) {
+//    Variable for animation of flashcard
     var visible by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     val configuration = LocalConfiguration.current
     var screenWidthDp = configuration.screenWidthDp
-    val savedWordsState = savedWordsViewModel.savedWordSate.value;
+//    State to get list saved word
+    val savedWordsState = savedWordsViewModel.savedWordSate.value
+//    Value count remember and forget word
     var countRightWord by rememberSaveable { mutableIntStateOf(0) }
     var countWrongWord by rememberSaveable { mutableIntStateOf(0) }
-    var index = 0;
+//    Index of wordItem in list
+    var index = 0
     AppBar(
         topBar = {
             Row(
@@ -93,15 +95,16 @@ fun FlashCardScreen(
             contentAlignment = Alignment.Center
         ) {
             if (savedWordsState.savedWords.isEmpty()) {
+//                Warning if saved word is empty
                 Warning()
-            }else if(index==savedWordsState.savedWords.size){
+            } else if (index == savedWordsState.savedWords.size) {
                 ResultItem(countRightWord = countRightWord, countWrongWord = countWrongWord)
-            }
-            else {
+            } else {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
+//                    Count remember and forget word
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -109,52 +112,58 @@ fun FlashCardScreen(
                         CountBox(countValue = countWrongWord, color = AppTheme.appColor.wrong)
                         CountBox(countValue = countRightWord, color = AppTheme.appColor.right)
                     }
-                        Box(modifier = Modifier.fillMaxHeight(0.8f)) {
-                            this@Column.AnimatedVisibility(
-                                visible = visible,
-                                enter = fadeIn(),
-                                exit = slideOutHorizontally { screenWidthDp } + fadeOut(),
-                                modifier = Modifier.fillMaxHeight()
-                            ) {
-                                FlashCard(savedWordsState.savedWords[index])
-                                index++
-                            }
+                    Spacer(modifier = Modifier.padding(vertical = 5.dp))
+                    Box(modifier = Modifier.fillMaxHeight(0.8f)) {
+//                        flip animation
+                        this@Column.AnimatedVisibility(
+                            visible = visible,
+                            enter = fadeIn(),
+                            exit = slideOutHorizontally { screenWidthDp } + fadeOut(),
+                            modifier = Modifier.fillMaxHeight()
+                        ) {
+                            FlashCard(savedWordsState.savedWords[index])
                         }
-
+                    }
                     Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+//                        Forget word button
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Forget word button",
                             tint = AppTheme.appColor.wrong,
                             modifier = Modifier
                                 .size(height = 65.dp, width = 100.dp)
-                                .shadow(10.dp, RoundedCornerShape(15.dp))
+                                .shadow(5.dp, RoundedCornerShape(15.dp))
                                 .background(Color.White, RoundedCornerShape(15.dp))
                                 .clickable {
+                                    index++
                                     countWrongWord++
                                     scope.launch {
+//                                        Negative value -> Animation to left
                                         screenWidthDp = -screenWidthDp
                                         visible = !visible
                                         delay(800)
                                         visible = !visible
+//                                        Reset value
+                                        screenWidthDp = -screenWidthDp
                                     }
                                 }
                         )
-
+//                        Remember word button
                         Icon(
                             imageVector = Icons.Default.Check,
                             contentDescription = "Remember word button",
                             tint = AppTheme.appColor.right,
                             modifier = Modifier
                                 .size(height = 65.dp, width = 100.dp)
-                                .shadow(10.dp, RoundedCornerShape(15.dp))
+                                .shadow(5.dp, RoundedCornerShape(15.dp))
                                 .background(Color.White, RoundedCornerShape(15.dp))
                                 .clickable {
+                                    index++
                                     countRightWord++
                                     scope.launch {
                                         visible = !visible
@@ -167,13 +176,5 @@ fun FlashCardScreen(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = false)
-@Composable
-fun PreviewFlashCardScreen() {
-    AppTheme {
-//        FlashCardScreen()
     }
 }

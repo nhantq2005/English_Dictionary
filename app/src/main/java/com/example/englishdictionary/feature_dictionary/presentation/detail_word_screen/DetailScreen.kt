@@ -11,17 +11,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -31,7 +28,6 @@ import com.example.englishdictionary.feature_dictionary.presentation.components.
 import com.example.englishdictionary.feature_dictionary.presentation.components.SaveButton
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.MeaningItem
 import com.example.englishdictionary.feature_dictionary.presentation.main_screen.components.PhoneticItem
-import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordsViewModel
 import com.example.englishdictionary.ui.theme.AppTheme
 
 @Composable
@@ -114,15 +110,14 @@ fun DetailScreen(
                             }
                         }
                     }
+                    Spacer(modifier = Modifier.padding(5.dp))
                     //Show meaning, example,... of word
                     LazyColumn(contentPadding = PaddingValues(horizontal = 10.dp)) {
                         if (wordItem != null) {
                             items(wordItem.meanings.size) { index ->
-                                wordItem.meanings[index].let {
-                                    MeaningItem(
-                                        meaning = it,
-                                    )
-                                }
+                                MeaningItem(
+                                    meaning = wordItem.meanings[index],
+                                )
                                 Spacer(modifier = Modifier.height(5.dp))
                             }
                         }
@@ -132,13 +127,5 @@ fun DetailScreen(
             }
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewDetailScreen() {
-    AppTheme {
-//        DetailScreen()
     }
 }

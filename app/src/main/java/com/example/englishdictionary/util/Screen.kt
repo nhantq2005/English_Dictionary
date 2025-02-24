@@ -7,6 +7,5 @@ sealed class Screen(
     object MainScreen:Screen("main_screen","Dictionary")
     object SavedWordScreen:Screen("saved_words_screen","Saved Words")
     object FlashCardScreen:Screen("flashcard_screen","Flashcard")
-
     object DetailScreen:Screen("detail_screen","Deatil Screen")
 }

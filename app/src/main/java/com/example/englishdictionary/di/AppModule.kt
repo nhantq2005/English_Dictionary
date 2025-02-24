@@ -14,17 +14,6 @@ import com.example.englishdictionary.feature_dictionary.domain.use_cases.GetWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.SaveWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.UnsaveWord
 import com.example.englishdictionary.feature_dictionary.domain.use_cases.WordUseCases
-import com.example.englishdictionary.feature_dictionary.presentation.flashcard_screen.FlashcardViewModel
-import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.SavedWordState
-//import com.example.englishdictionary.feature_dictionary.data.repository.WordRepositoryImpl
-//import com.example.englishdictionary.feature_dictionary.domain.repository.WordRepository
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.CheckWordExist
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.FindWord
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.GetWord
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.GetWords
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.SaveWord
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.UnsaveWord
-//import com.example.englishdictionary.feature_dictionary.domain.use_cases.WordUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -2,6 +2,7 @@ package com.example.englishdictionary.feature_dictionary.presentation.flashcard_
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -28,16 +29,8 @@ fun CountBox(
             color = color,
             style = AppTheme.appTypograhy.countValue,
             modifier = Modifier
-                .padding(15.dp)
+                .padding(vertical = 10.dp, horizontal = 15.dp)
 
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewCountBox() {
-    AppTheme {
-        CountBox(countValue = 1, color = AppTheme.appColor.wrong)
     }
 }

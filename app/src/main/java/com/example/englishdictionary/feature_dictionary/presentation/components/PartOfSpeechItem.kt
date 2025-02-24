@@ -31,11 +31,3 @@ fun PartOfSpeechItem(partOfSpeech: String) {
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPartOfSpeechItem() {
-    EnglishDictionaryTheme {
-        PartOfSpeechItem("Noun")
-    }
-}
