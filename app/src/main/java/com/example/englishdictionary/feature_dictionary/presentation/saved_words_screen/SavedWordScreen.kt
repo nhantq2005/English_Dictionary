@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.englishdictionary.feature_dictionary.presentation.components.AppBar
-import com.example.englishdictionary.feature_dictionary.presentation.components.SearchTextField
 import com.example.englishdictionary.feature_dictionary.presentation.components.Warning
 import com.example.englishdictionary.feature_dictionary.presentation.saved_words_screen.components.SavedWordItem
 import com.example.englishdictionary.ui.theme.AppTheme
