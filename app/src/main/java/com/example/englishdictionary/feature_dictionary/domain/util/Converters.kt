@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-//Convert list nested object to JSON to save in Roomdatabase
+//Convert list nested object to JSON to save in Room Database
 class Converters {
 
     private val gson = Gson()
